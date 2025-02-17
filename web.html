@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaiMaaYang</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            overflow: hidden;
+        }
+
+        /* พื้นหลังแบบเลเยอร์คู่ */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        #bg1 {
+            z-index: -2;
+            opacity: 1;
+        }
+
+        #bg2 {
+            z-index: -1;
+            opacity: 0;
+        }
+
+        /* แถบเมนูด้านบน */
+        .navbar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 20px 0px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .navbar a {
+            display: inline-block;
+            padding: 12px 20px;
+            margin: 20px;
+            background: white;
+            color: black;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a:hover {
+            background: #f4a261;
+            color: white;
+        }
+
+        /* เมนูด้านข้าง */
+        .sidebar {
+            position: absolute;
+            left: 20px;
+            top: 100px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar button {
+            background: white;
+            color: orange;
+            border: none;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar button:hover {
+            background: #f4a261;
+            color: white;
+        }
+
+        /* ข้อความใหญ่ "ไปมายัง" */
+        .title {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            font-size: 80px;
+            font-weight: bold;
+            transform: rotate(-10deg);
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- เลเยอร์พื้นหลัง 2 ชั้น -->
+    <div id="bg1" class="background"></div>
+    <div id="bg2" class="background"></div>
+
+    <!-- เมนูด้านบน -->
+    <div class="navbar">
+        <a href="web.html">หน้าหลัก</a>
+        <a href="web8.html">แนะนำ</a>
+        <a href="web9.html">เกี่ยวกับ</a>
+    </div>
+    
+    <!-- เมนูด้านข้าง -->
+    <div class="sidebar">
+    <button onclick="window.location.href='web2.html'">ภาคเหนือ</button>
+    <button onclick="window.location.href='web3.html'">ภาคตะวันตก</button>
+    <button onclick="window.location.href='web4.html'">ภาคกลาง</button>
+    <button onclick="window.location.href='web5.html'">ภาคตะวันออกเฉียงเหนือ</button>
+    <button onclick="window.location.href='web6.html'">ภาคตะวันออก</button>
+    <button onclick="window.location.href='web7.html'">ภาคใต้</button>
+    </div>
+
+    <!-- ข้อความใหญ่ -->
+    <div class="title"></div>
+
+    <script>
+        const images = [
+            'https://wallup.net/wp-content/uploads/2015/12/220146-nature-landscape-beach-Thailand-sunset-island-sea-sand-trees-limestone-rock.jpg',
+            'https://blueskyproperty.co.th/wp-content/uploads/2023/05/Apr5-4-1536x1024.jpg',
+            'https://pixelz.cc/wp-content/uploads/2016/11/railay-beach-thailand-4k-wallpaper.jpg',
+            'https://wallpaperaccess.com/full/150611.jpg',
+            'https://cdn.wallpapersafari.com/79/10/BEx3qX.jpg',
+            'https://paikondieow.com/wp-content/uploads/2021/01/0-0.jpg'
+        ];
+
+        let index = 0;
+        const bg1 = document.getElementById("bg1");
+        const bg2 = document.getElementById("bg2");
+
+        // ตั้งค่าภาพเริ่มต้น
+        bg1.style.backgroundImage = `url('${images[index]}')`;
+
+        function changeBackground() {
+            index = (index + 1) % images.length;
+
+            // กำหนดภาพใหม่ให้ bg2
+            bg2.style.backgroundImage = `url('${images[index]}')`;
+            bg2.style.opacity = "1";  // แสดง bg2
+            
+            setTimeout(() => {
+                bg1.style.backgroundImage = bg2.style.backgroundImage; // ย้ายภาพจาก bg2 ไป bg1
+                bg2.style.opacity = "0"; // ซ่อน bg2
+            }, 1500);
+        }
+
+        setInterval(changeBackground, 3500);
+    </script>
+
+</body>
+</html>
